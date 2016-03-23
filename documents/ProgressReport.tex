@@ -1,0 +1,17 @@
+\documentclass[]{article}
+\title{CS246 Project Report: TwitNews}
+\author{Chris Moghbel, Lei Jin}
+
+\begin{document}
+\maketitle
+
+\section{Progress} 
+First, we've gotten a crawler for Twitter working. To do this, we first needed to setup a MySQL database and write the database code. We then implemented the crawler, which attempts to crawl at least 1000 tweets for each current trend. The crawler also has various failsafes, such as a switch rate threshold that will switch to another trend if tweets for the current trend are coming in too slow. Second, we've implemented a basic tweet ranking algorithm, which we've based on the TrustRank algorithm presented in class. This ranking algorithm gives varying weight to several different factors in order to rank a tweet: whether the tweeter is a verified user, how many retweets that tweet got, the number of followers of the user, and whether or not that tweet has a link. This ranking algorithm works fairly well, especially on trends that could be more readily classified as news.
+
+\section{Challenges So Far}
+One of the main challenges so far has been working with the Twitter API. The first challenge of this nature that we encountered was Twitter's rate-limiting on the REST and Search APIs, which limits an application to 350 and 150 api calls per hour respectively. This made it impossible to create a crawler using these apis, which allow for more specific information to be gathered. Instead, we've had to use the Stream API, which has no rate-limiting, but just returns a small sampling of all the current tweets. Another issue we've had with the apis is that the retweet counts associated with each tweet is limited to 101. This makes it harder to differentiate between tweets based on the number of retweets, as many tweets will hit this max number. We also encountered several MySQL errors, most notably a double precision error, which forced us to scale the ranks by 1 million and cast them to ints. We've also seen a high number of spam tweets, which makes us believe we'll have to do a bit more work on spam filtering than we previously thought.
+
+\section{What's Next}
+Our next steps will focus on two areas. The first will be to improve the ranking algorithm. A couple things that we have in mind are penalizing tweets that have a high number of hashtags, or a high number of words that match the current trends. This is because many spam tweets contain multiple trends in the text in order to gain higher visibility. The second will be to implement the news filtering algorithm. One idea we have for this is to calculate the link to number of tweet ratio, as we believe more newsworthy trends will have a higher ratio of links. We also need to compile our final data sets in order to test and evaluate our methods.
+
+\end{document}

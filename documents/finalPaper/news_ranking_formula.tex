@@ -1,0 +1,27 @@
+\begin{equation}
+R(T_i) = \epsilon \cdot \sum M \cdot \alpha \cdot \log\left(\frac{\sum rt_i}{RT}\right) + \beta \cdot v_i + \gamma \cdot l_i + \delta \cdot \log \left(\frac{f_i}{F}\right)
+\end{equation}
+
+$
+rt_i = \text{a retweet of } T_i
+
+f_i = \text{\# of followers of tweeter, at time of tweet}
+
+RT = \text{max \# of retweets, limited to 101 by API}
+
+F = \text{\# followers of most followed Twitter user}
+
+M = \text{\# of keyword matches between query and tweet}
+
+\alpha + \beta + \gamma + \delta + \epsilon = 1
+
+v_i = \begin{cases}
+          1 & \text{if the tweeter is verified} \\
+          0 & \text{otherwise}
+        \end{cases}
+
+l_i = \begin{cases}
+          1 & \text{if the tweet contains a link} \\
+          0 & \text{otherwise}
+        \end{cases} \\
+$
